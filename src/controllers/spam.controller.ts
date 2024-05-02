@@ -1,4 +1,4 @@
-// import { Request, Response } from "express";
+import { Request, Response } from "express";
 // import { SpamsSchema } from "../models/spams.schema";
 
 import { SpamsSchema } from "../models/spams.schema";
@@ -22,7 +22,7 @@ import { SpamsSchema } from "../models/spams.schema";
 const oracledb = require('oracledb');
 const dbConfig = require('../utils/databaseOracle');
 
-export const obtenerSpams= async () => {
+export const obtenerSpams= async (req: Request, res: Response) => {
     try {
         // Utilizar el método find() para obtener todos los documentos del modelo
         const modelosArray = await SpamsSchema.find();
@@ -64,6 +64,8 @@ export const obtenerSpams= async () => {
             }
         };
         console.log({ exito: true, mensaje: "Correos Spams Insertados correctamente" });
+        res.send({ message: 'Correos Spams extraidos exitosamente'});
+        res.end();
     } catch (error) {
         // Manejar cualquier error que ocurra durante la consulta a la base de datos
         console.error('Error al obtener todos los modelos:', error);

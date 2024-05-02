@@ -1,6 +1,4 @@
 "use strict";
-// import { Request, Response } from "express";
-// import { SpamsSchema } from "../models/spams.schema";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -12,10 +10,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.obtenerCorreos = void 0;
+// import { SpamsSchema } from "../models/spams.schema";
 const correos_schema_1 = require("../models/correos.schema");
 const oracledb = require('oracledb');
 const dbConfig = require('../utils/databaseOracle');
-const obtenerCorreos = () => __awaiter(void 0, void 0, void 0, function* () {
+const obtenerCorreos = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         // Utilizar el método find() para obtener todos los documentos del modelo
         const modelosArray = yield correos_schema_1.CorreoSchema.find();
@@ -82,6 +81,10 @@ const obtenerCorreos = () => __awaiter(void 0, void 0, void 0, function* () {
                 console.log(error);
             }
         }
+        ;
+        console.log({ exito: true, mensaje: "Correos insertados exitosamente" });
+        res.send({ message: 'Correos extraidos exitosamente' });
+        res.end();
     }
     catch (error) {
         // Manejar cualquier error que ocurra durante la consulta a la base de datos

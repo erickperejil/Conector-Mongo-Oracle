@@ -13,7 +13,7 @@ exports.obtenerPapelera = void 0;
 const papelera_schema_1 = require("../models/papelera.schema");
 const oracledb = require('oracledb');
 const dbConfig = require('../utils/databaseOracle');
-const obtenerPapelera = () => __awaiter(void 0, void 0, void 0, function* () {
+const obtenerPapelera = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         // Utilizar el método find() para obtener todos los documentos del modelo
         const modelosArray = yield papelera_schema_1.PapeleraSchema.find();
@@ -51,6 +51,8 @@ const obtenerPapelera = () => __awaiter(void 0, void 0, void 0, function* () {
         }
         ;
         console.log({ exito: true, mensaje: "Papelera Insertada correctamente" });
+        res.send({ message: 'Papelera insertada exitosamente' });
+        res.end();
     }
     catch (error) {
         // Manejar cualquier error que ocurra durante la consulta a la base de datos

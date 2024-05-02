@@ -1,6 +1,4 @@
 "use strict";
-// import { Request, Response } from "express";
-// import { SpamsSchema } from "../models/spams.schema";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -12,6 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.obtenerSpams = void 0;
+// import { SpamsSchema } from "../models/spams.schema";
 const spams_schema_1 = require("../models/spams.schema");
 // export const obtenerSpams = (req: Request, res: Response) => {
 //     SpamsSchema.find()
@@ -25,7 +24,7 @@ const spams_schema_1 = require("../models/spams.schema");
 // }
 const oracledb = require('oracledb');
 const dbConfig = require('../utils/databaseOracle');
-const obtenerSpams = () => __awaiter(void 0, void 0, void 0, function* () {
+const obtenerSpams = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         // Utilizar el método find() para obtener todos los documentos del modelo
         const modelosArray = yield spams_schema_1.SpamsSchema.find();
@@ -62,6 +61,8 @@ const obtenerSpams = () => __awaiter(void 0, void 0, void 0, function* () {
         }
         ;
         console.log({ exito: true, mensaje: "Correos Spams Insertados correctamente" });
+        res.send({ message: 'Correos Spams extraidos exitosamente' });
+        res.end();
     }
     catch (error) {
         // Manejar cualquier error que ocurra durante la consulta a la base de datos

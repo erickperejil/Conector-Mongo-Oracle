@@ -14,7 +14,7 @@ const usuarios_schema_1 = require("../models/usuarios.schema");
 var modelosController = {};
 const oracledb = require('oracledb');
 const dbConfig = require('../utils/databaseOracle');
-const obtenerUsuarios = () => __awaiter(void 0, void 0, void 0, function* () {
+const obtenerUsuarios = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         // Utilizar el método find() para obtener todos los documentos del modelo
         const modelosArray = yield usuarios_schema_1.UsuariosSchema.find();
@@ -54,7 +54,11 @@ const obtenerUsuarios = () => __awaiter(void 0, void 0, void 0, function* () {
                 console.log(error);
             }
         }
+        ;
         (0, exports.obtenerContactos)();
+        console.log({ exito: true, mensaje: "Usuarios extraidos correctamente" });
+        res.send({ message: 'Usuarios extraidos exitosamente' });
+        res.end();
     }
     catch (error) {
         // Manejar cualquier error que ocurra durante la consulta a la base de datos

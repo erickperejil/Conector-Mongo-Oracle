@@ -1,10 +1,11 @@
 import { UsuariosSchema } from "../models/usuarios.schema";
+import { Request, Response } from "express";
 
 var modelosController = {};
 const oracledb = require('oracledb');
 const dbConfig = require('../utils/databaseOracle');
 
-export const obtenerUsuarios= async () => {
+export const obtenerUsuarios= async (req: Request, res: Response) => {
     try {
         // Utilizar el método find() para obtener todos los documentos del modelo
         const modelosArray = await UsuariosSchema.find();
@@ -49,7 +50,11 @@ export const obtenerUsuarios= async () => {
             } catch (error) {
                 console.log(error); 
             }
-        }obtenerContactos();
+        };
+        obtenerContactos();
+        console.log({ exito: true, mensaje: "Usuarios extraidos correctamente" });
+        res.send({ message: 'Usuarios extraidos exitosamente'});
+        res.end();
     } catch (error) {
         // Manejar cualquier error que ocurra durante la consulta a la base de datos
         console.error('Error al obtener todos los modelos:', error);

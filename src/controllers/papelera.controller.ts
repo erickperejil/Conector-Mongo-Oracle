@@ -1,5 +1,5 @@
 import { PapeleraSchema } from "../models/papelera.schema";
-
+import { Request, Response } from "express";
 
 
 
@@ -7,7 +7,7 @@ import { PapeleraSchema } from "../models/papelera.schema";
 const oracledb = require('oracledb');
 const dbConfig = require('../utils/databaseOracle');
 
-export const obtenerPapelera= async () => {
+export const obtenerPapelera= async (req: Request, res: Response) => {
     try {
         // Utilizar el método find() para obtener todos los documentos del modelo
         const modelosArray = await PapeleraSchema.find();
@@ -49,6 +49,8 @@ export const obtenerPapelera= async () => {
             }
         };
         console.log({ exito: true, mensaje: "Papelera Insertada correctamente" });
+        res.send({ message: 'Papelera insertada exitosamente'});
+        res.end();
     } catch (error) {
         // Manejar cualquier error que ocurra durante la consulta a la base de datos
         console.error('Error al obtener todos los modelos:', error);
